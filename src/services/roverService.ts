@@ -1,23 +1,34 @@
-import { directions, Direction } from "../constants/directions";
-import { Position } from "../types/typtes";
+import {
+  directions,
+  NORTH,
+  EAST,
+  SOUTH,
+  WEST,
+} from "../constants/directions";
+
+import { Position, Direction } from "../types/typtes";
+
+function getNextIndex(currentIndex: number, offset: number): number {
+  return (currentIndex + offset + directions.length) % directions.length;
+}
 
 export function turnLeft(currentDirection: Direction): Direction {
   const index = directions.indexOf(currentDirection);
-  return directions[(index - 1 + 4) % 4];
+  return directions[getNextIndex(index, -1)];
 }
 
 export function turnRight(currentDirection: Direction): Direction {
   const index = directions.indexOf(currentDirection);
-  return directions[(index + 1) % 4];
+  return directions[getNextIndex(index, 1)];
 }
 
 export function moveForward(position: Position): Position {
   const { x, y, direction } = position;
   switch (direction) {
-    case 'N': return { ...position, y: y + 1 };
-    case 'E': return { ...position, x: x + 1 };
-    case 'S': return { ...position, y: y - 1 };
-    case 'W': return { ...position, x: x - 1 };
+    case NORTH: return { ...position, y: y + 1 };
+    case EAST: return { ...position, x: x + 1 };
+    case SOUTH: return { ...position, y: y - 1 };
+    case WEST: return { ...position, x: x - 1 };
     default: return position;
   }
 }

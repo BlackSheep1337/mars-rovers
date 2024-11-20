@@ -1,3 +1,5 @@
+import { directions } from "../constants/directions";
+
 export interface Plateau {
   width: number;
   height: number;
@@ -14,3 +16,5 @@ export interface RoverCommand {
   position: Position;
   commands: string;
 }
+
+export type Direction = typeof directions[number];
