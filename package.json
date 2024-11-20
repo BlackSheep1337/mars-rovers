@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
-    "start:dev": "tsx watch src/index.ts"
+    "start:dev": "tsx watch src/index.ts",
+    "test": "jest --watch"
   },
   "keywords": [],
   "author": "",
