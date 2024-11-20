@@ -3,7 +3,7 @@ import { Position, RoverCommand } from "../types/typtes";
 import { moveForward, turnLeft, turnRight } from "../services/roverService";
 import { LEFT, MOVE, RIGHT } from "../constants/directions";
 
-export function processRoverCommands(req: Request, res: Response): void {
+export function processCommands(req: Request, res: Response): void {
   const { position, commands }: RoverCommand = req.body;
   let currentPosition: Position = position;
 

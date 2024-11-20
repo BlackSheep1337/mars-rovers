@@ -6,7 +6,7 @@ const PORT = 5000;
 
 const app = express();
 app.use(bodyParser.json());
-app.use('/api', routes);
+app.use('/api/rovers', routes);
 
 app
   .listen(PORT)

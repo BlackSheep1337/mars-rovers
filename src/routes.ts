@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import { processRoverCommands } from './controllers/roverController';
+import { processCommands } from './controllers/roverController';
 
 const router = Router();
 
-router.post('/rovers/commands', processRoverCommands);
+router.post('/commands', processCommands);
 
 export default router;

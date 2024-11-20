@@ -1,6 +1,7 @@
 ### POST request to process commands
 POST http://localhost:5000/api/rovers/commands
 Content-Type: application/json
+
 {
   "position": {
     "x": 0,
