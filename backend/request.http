@@ -4,9 +4,9 @@ Content-Type: application/json
 
 {
   "position": {
-    "x": 0,
-    "y": 0,
-    "direction": "NORTH"
+    "x": 3,
+    "y": 3,
+    "direction": "E"
   },
-  "commands": "LMLMLMLMM"
+  "commands": "MRRMMRMRRM"
 }

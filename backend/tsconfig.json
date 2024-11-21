@@ -11,7 +11,7 @@
   "include": [
     "src/**/*.ts",
     "test/**/*.ts"
-  ],
+, "backend/src/index.ts", "backend/src/routes.ts"  ],
   "exclude": [
     "node_modules",
     "dist"

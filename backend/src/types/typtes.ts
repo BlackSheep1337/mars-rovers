@@ -1,10 +1,5 @@
 import { directions } from "../constants/directions";
 
-export interface Plateau {
-  width: number;
-  height: number;
-}
-
 export interface Position {
   x: number;
   y: number;
@@ -12,7 +7,6 @@ export interface Position {
 }
 
 export interface RoverCommand {
-  plateau: Plateau;
   position: Position;
   commands: string;
 }
