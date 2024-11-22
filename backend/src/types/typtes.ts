@@ -1,9 +1,12 @@
 import { directions } from "../constants/directions";
+import { Document } from 'mongoose';
+
+export type Direction = typeof directions[number];
 
 export interface Position {
   x: number;
   y: number;
-  direction: 'N' | 'E' | 'S' | 'W';
+  direction: Direction;
 }
 
 export interface RoverCommand {
@@ -11,4 +14,9 @@ export interface RoverCommand {
   commands: string;
 }
 
-export type Direction = typeof directions[number];
+
+export interface IUser extends Document {
+  email: string;
+  password: string;
+  roverHistory: RoverCommand[];
+}
