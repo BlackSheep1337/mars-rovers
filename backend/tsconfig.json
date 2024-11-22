@@ -6,10 +6,11 @@
     "esModuleInterop": true,
     "strict": true,
     "outDir": "./dist",
-    "rootDir": "./src"
+    "rootDir": "./src",
+    "skipLibCheck": true
   },
   "include": [
-    "src/**/*.ts",
+    "src/**/*", "types/**/*.d.ts",
     "test/**/*.ts"
 , "backend/src/index.ts", "backend/src/routes.ts"  ],
   "exclude": [

@@ -10,3 +10,13 @@ Content-Type: application/json
   },
   "commands": "MRRMMRMRRM"
 }
+
+###
+
+POST http://localhost:5000/api/rovers/register
+Content-Type: application/json
+
+{
+  "email": "alexandre@gmail.com",
+  "password": "123456789"
+}
