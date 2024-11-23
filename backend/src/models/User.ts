@@ -4,7 +4,14 @@ import { IUser } from '../types/typtes';
 const userSchema = new Schema<IUser>({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  roverHistory: [{ x: Number, y: Number, direction: String, command: String }],
+  roverHistory: [
+    {
+      x: { type: Number, required: true },
+      y: { type: Number, required: true },
+      direction: { type: String, required: true },
+      command: { type: String, required: true },
+    },
+  ],
 });
 
 const User = mongoose.model<IUser>('User', userSchema);

@@ -31,3 +31,15 @@ Content-Type: application/json
   "email": "user@example.com",
   "password": "SecureP@ssw0rd"
 }
+
+###
+
+GET http://localhost:5000/api/rovers/history
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzQyMzQ4NTY1ZWE2NjY5MTU3MjM0Y2UiLCJpYXQiOjE3MzIzOTQyODQsImV4cCI6MTczMjM5Nzg4NH0.6XXq4Qoi6SYV_qL0k4ifeBaFa1rFe8ffUq36VDrilBI
+
+
+{
+  "email": "user@example.com",
+  "password": "SecureP@ssw0rd"
+}

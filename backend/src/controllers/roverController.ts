@@ -19,27 +19,6 @@ export function processCommands(req: Request, res: Response): void {
   res.json({ finalPosition: currentPosition });
 }
 
-export async function addRoverMovement(req: Request, res: Response): Promise<void> {
-  const { command, x, y, direction } = req.body;
-  const userId = req.userId;
-
-  if (!userId) {
-    res.status(401).json({ message: "Unauthorized. User ID missing." });
-    return;
-  }
-
-  const user = await User.findById(userId);
-  if (!user) {
-    res.status(400).json({ message: "User not found." });
-    return;
-  }
-
-  user.roverHistory.push({ x, y, direction, command });
-  await user.save();
-
-  res.status(200).json({ message: "Movement added to history." });
-}
-
 export async function getRoverHistory(req: Request, res: Response): Promise<void> {
   const userId = req.userId;
 
