@@ -1,6 +1,7 @@
 ### POST request to process commands
 POST http://localhost:5000/api/rovers/commands
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzQyMzQ4NTY1ZWE2NjY5MTU3MjM0Y2UiLCJpYXQiOjE3MzIzOTQyODQsImV4cCI6MTczMjM5Nzg4NH0.6XXq4Qoi6SYV_qL0k4ifeBaFa1rFe8ffUq36VDrilBI
 
 {
   "position": {
@@ -17,6 +18,16 @@ POST http://localhost:5000/api/rovers/register
 Content-Type: application/json
 
 {
-  "email": "alexandre@gmail.com",
-  "password": "123456789"
+  "email": "user12@example.com",
+  "password": "SecureP@ssw0rd"
+}
+
+###
+
+POST http://localhost:5000/api/rovers/login
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "SecureP@ssw0rd"
 }

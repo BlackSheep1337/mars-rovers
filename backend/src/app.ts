@@ -4,17 +4,17 @@ import routes from './routes';
 import connectDB from './config/db';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+dotenv.config();
 
 const app = express();
 connectDB();
 
-dotenv.config();
 
 app.use(bodyParser.json());
 app.use('/api/rovers', routes);
 
 mongoose
-  .connect(process.env.MONG_URL || '')
+  .connect(process.env.MONGO_URI || '')
   .then(() => console.log('MongoDB connected'))
   .catch((err) => console.error('MongoDB connection error: ', err));
 

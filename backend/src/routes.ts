@@ -1,7 +1,8 @@
 import { Router } from 'express';
 import { getRoverHistory, processCommands } from './controllers/roverController';
 import { authMiddleware } from './middleware/authMiddleware';
-import { loginUser, registerUser } from './controllers/authController';
+import { registerUser } from './controllers/registerController';
+import { loginUser } from './controllers/loginController';
 
 const router = Router();
 
