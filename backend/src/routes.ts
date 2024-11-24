@@ -1,5 +1,6 @@
 import { Router } from 'express';
-import { getRoverHistory, processCommands } from './controllers/roverController';
+import { processCommands } from './controllers/processCommandsController';
+import { getRoverHistory } from './controllers/getHistoryController';
 import { authMiddleware } from './middleware/authMiddleware';
 import { registerUser } from './controllers/registerController';
 import { loginUser } from './controllers/loginController';

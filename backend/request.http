@@ -38,7 +38,15 @@ GET http://localhost:5000/api/rovers/history
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzQyMzQ4NTY1ZWE2NjY5MTU3MjM0Y2UiLCJpYXQiOjE3MzI0Mzg0MzMsImV4cCI6MTczMjQ0MjAzM30.M1eARO-H6dnC9ASTL0r5FR2WMP24WWtRNHZHlWaDbXE
 //Use your Authorization Bearer <Token> to access commands history or to make new commands.
-{
-  "email": "user@example.com",
-  "password": "SecureP@ssw0rd"
-}
+
+###
+
+DELETE http://localhost:5000/api/rovers/history/delete/6742ee6d3f57acdd989a4e10
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzQyMzQ4NTY1ZWE2NjY5MTU3MjM0Y2UiLCJpYXQiOjE3MzI0Mzg0MzMsImV4cCI6MTczMjQ0MjAzM30.M1eARO-H6dnC9ASTL0r5FR2WMP24WWtRNHZHlWaDbXE
+
+###
+
+DELETE http://localhost:5000/api/rovers/history/delete/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzQyMzQ4NTY1ZWE2NjY5MTU3MjM0Y2UiLCJpYXQiOjE3MzI0Mzg0MzMsImV4cCI6MTczMjQ0MjAzM30.M1eARO-H6dnC9ASTL0r5FR2WMP24WWtRNHZHlWaDbXE
