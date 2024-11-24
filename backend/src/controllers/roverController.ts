@@ -4,19 +4,49 @@ import { moveForward, turnLeft, turnRight } from "../services/roverService";
 import { LEFT, MOVE, RIGHT } from "../constants/directions";
 import User from "../models/User";
 
-export function processCommands(req: Request, res: Response): void {
+export async function processCommands(req: Request, res: Response): Promise<void> {
   const { position, commands }: RoverCommand = req.body;
   let currentPosition: Position = position;
 
+  const userId = req.userId;
+
+  if (!commands || currentPosition.x === undefined || currentPosition.y === undefined || !currentPosition.direction) {
+    res.status(400).json({ message: "Missing required fields." });
+    return;
+  }
+
+  if (!userId) {
+    res.status(401).json({ message: "Unauthorized. User ID missing." });
+    return;
+  }
+
+  const user = await User.findById(userId);
+  if (!user) {
+    res.status(400).json({ message: "User not found." });
+    return;
+  }
+
+  
   commands.split('').forEach(command => {
     command = command.toUpperCase();
-
+    
     if (command === LEFT) currentPosition.direction = turnLeft(currentPosition.direction);
     if (command === RIGHT) currentPosition.direction = turnRight(currentPosition.direction);
     if (command === MOVE) currentPosition = moveForward(currentPosition);
   });
 
-  res.json({ finalPosition: currentPosition });
+  const newMovement: RoverCommand = { position: currentPosition, commands };
+
+  try {
+    user.roverHistory.push(newMovement);
+    await user.save();
+
+    res.status(200).json({ message: `Movement [${currentPosition}] added to history.` });
+    console.log("Updated rover history:", user.roverHistory);
+  } catch (error) {
+    console.error("Error saving movement:", error);
+    res.status(500).json({ message: "Failed to save movement." });
+  }
 }
 
 export async function getRoverHistory(req: Request, res: Response): Promise<void> {

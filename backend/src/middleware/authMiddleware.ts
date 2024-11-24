@@ -12,14 +12,11 @@ export function authMiddleware(req: Request, res: Response, next: NextFunction):
   const token = authorizationHeader.split(" ")[1];
 
   try {
-    console.log('JWT_SECRET used for verification:', process.env.JWT_SECRET);
-    // Verifica o token
-    const decoded = jwt.verify(token, 'Khf78@1!bGhiKloP90dLs3fmnAzQ4r5T') as { userId: string };
-    console.log("decoded:", decoded)
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || '') as { userId: string };
     req.userId = decoded.userId;
     next();
   } catch (error) {
-      console.error("Token verification error:", error);  // Log the exact error
+    console.error("Token verification error: ", error);
     res.status(401).json({ message: "Unauthorized. Invalid token." });
   }
 }
