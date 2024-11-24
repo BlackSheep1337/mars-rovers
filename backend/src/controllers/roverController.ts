@@ -35,13 +35,26 @@ export async function processCommands(req: Request, res: Response): Promise<void
     if (command === MOVE) currentPosition = moveForward(currentPosition);
   });
 
-  const newMovement: RoverCommand = { position: currentPosition, commands };
+const newMovement: RoverCommand = {
+  position: {
+    x: currentPosition.x,
+    y: currentPosition.y,
+    direction: currentPosition.direction,
+  },
+  commands,
+};
 
   try {
     user.roverHistory.push(newMovement);
     await user.save();
 
-    res.status(200).json({ message: `Movement [${currentPosition}] added to history.` });
+    res.status(200).json({
+      message: "Command processed successfully and saved to history.",
+      finalPosition: newMovement.position,
+      commandsExecuted: newMovement.commands,
+      historyCount: user.roverHistory.length,
+    });
+
     console.log("Updated rover history:", user.roverHistory);
   } catch (error) {
     console.error("Error saving movement:", error);

@@ -6,10 +6,12 @@ const userSchema = new Schema<IUser>({
   password: { type: String, required: true },
   roverHistory: [
     {
-      x: { type: Number, required: true },
-      y: { type: Number, required: true },
-      direction: { type: String, required: true },
-      command: { type: String, required: true },
+      position: {
+        x: { type: Number, required: true },
+        y: { type: Number, required: true },
+        direction: { type: String, required: true },
+      },
+      commands: { type: String, required: true },
     },
   ],
 });
