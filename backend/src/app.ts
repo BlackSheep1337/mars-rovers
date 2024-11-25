@@ -13,9 +13,4 @@ connectDB();
 app.use(bodyParser.json());
 app.use('/api/rovers', routes);
 
-mongoose
-  .connect(process.env.MONGO_URI || '')
-  .then(() => console.log('MongoDB connected'))
-  .catch((err) => console.error('MongoDB connection error: ', err));
-
 export default app;

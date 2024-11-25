@@ -1,8 +1,8 @@
-### POST request to process commands
+ //Authorization Bearer <Token> the token depends on the user generate the token by login in the system.
 POST http://localhost:5000/api/rovers/commands  
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzQyMzQ4NTY1ZWE2NjY5MTU3MjM0Y2UiLCJpYXQiOjE3MzI0Mzg0MzMsImV4cCI6MTczMjQ0MjAzM30.M1eARO-H6dnC9ASTL0r5FR2WMP24WWtRNHZHlWaDbXE
- //Authorization Bearer <Token> the token depends on the user generate the token by login in the system.
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzQyMzQ4NTY1ZWE2NjY5MTU3MjM0Y2UiLCJpYXQiOjE3MzI1NDM5NTIsImV4cCI6MTczMjU0NzU1Mn0.h8NM1Z8WDni4AhKo8G3zhEUfBIH1eQLOTF3BdLCvh9M
+
 {
   "position": {
     "x": 1,
@@ -24,9 +24,10 @@ Content-Type: application/json
 
 ###
 
+//Login to generate your individual Authorization Bearer <Token>
 POST http://localhost:5000/api/rovers/login
 Content-Type: application/json
-//Login to generate your individual Authorization Bearer <Token>
+
 {
   "email": "user@example.com",
   "password": "SecureP@ssw0rd"
@@ -36,17 +37,11 @@ Content-Type: application/json
 
 GET http://localhost:5000/api/rovers/history
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzQyMzQ4NTY1ZWE2NjY5MTU3MjM0Y2UiLCJpYXQiOjE3MzI0Mzg0MzMsImV4cCI6MTczMjQ0MjAzM30.M1eARO-H6dnC9ASTL0r5FR2WMP24WWtRNHZHlWaDbXE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzQyMzQ4NTY1ZWE2NjY5MTU3MjM0Y2UiLCJpYXQiOjE3MzI1NDM5NTIsImV4cCI6MTczMjU0NzU1Mn0.h8NM1Z8WDni4AhKo8G3zhEUfBIH1eQLOTF3BdLCvh9M
 //Use your Authorization Bearer <Token> to access commands history or to make new commands.
-
-###
-
-DELETE http://localhost:5000/api/rovers/history/delete/6742ee6d3f57acdd989a4e10
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzQyMzQ4NTY1ZWE2NjY5MTU3MjM0Y2UiLCJpYXQiOjE3MzI0Mzg0MzMsImV4cCI6MTczMjQ0MjAzM30.M1eARO-H6dnC9ASTL0r5FR2WMP24WWtRNHZHlWaDbXE
 
 ###
 
 DELETE http://localhost:5000/api/rovers/history/delete/
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzQyMzQ4NTY1ZWE2NjY5MTU3MjM0Y2UiLCJpYXQiOjE3MzI0Mzg0MzMsImV4cCI6MTczMjQ0MjAzM30.M1eARO-H6dnC9ASTL0r5FR2WMP24WWtRNHZHlWaDbXE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzQyMzQ4NTY1ZWE2NjY5MTU3MjM0Y2UiLCJpYXQiOjE3MzI1NDM5NTIsImV4cCI6MTczMjU0NzU1Mn0.h8NM1Z8WDni4AhKo8G3zhEUfBIH1eQLOTF3BdLCvh9M
