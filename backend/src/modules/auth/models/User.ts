@@ -1,5 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
-import { IUser } from '../types/typtes';
+import { IUser } from '../../../shared/types/app';
 
 const userSchema = new Schema<IUser>({
   email: { type: String, required: true, unique: true },

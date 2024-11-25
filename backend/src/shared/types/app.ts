@@ -1,4 +1,4 @@
-import { directions } from "../constants/directions";
+import { directions } from "../../constants/directions";
 import { Document } from 'mongoose';
 
 export type Direction = typeof directions[number];

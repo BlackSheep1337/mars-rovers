@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { Position, RoverCommand } from "../types/typtes";
 import { moveForward, turnLeft, turnRight } from "../services/roverService";
 import { LEFT, MOVE, RIGHT } from "../constants/directions";
-import User from "../models/User";
+import User from "./auth/models/User";
 
 export async function processCommands(req: Request, res: Response): Promise<void> {
   const { position, commands }: RoverCommand = req.body;

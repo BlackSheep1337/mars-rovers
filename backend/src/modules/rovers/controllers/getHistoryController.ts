@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import User from "../models/User";
+import User from "./auth/models/User";
 
 export async function getRoverHistory(req: Request, res: Response): Promise<void> {
   const userId = req.userId;

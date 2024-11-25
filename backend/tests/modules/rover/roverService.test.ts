@@ -1,4 +1,4 @@
-import { EAST, NORTH, SOUTH, WEST } from '../src/constants/directions';
+import { EAST, NORTH, SOUTH, WEST } from '../../../src/constants/directions';
 import { turnLeft, turnRight, moveForward } from '../src/services/roverService';
 import { Position } from '../src/types/typtes';
 

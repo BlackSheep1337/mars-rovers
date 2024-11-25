@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import { processCommands } from './controllers/processCommandsController';
-import { getRoverHistory } from './controllers/getHistoryController';
-import { authMiddleware } from './middleware/authMiddleware';
-import { registerUser } from './controllers/registerController';
-import { loginUser } from './controllers/loginController';
-import { deleteRoverHistory } from './controllers/deleteRoverHistory';
+import { processCommands } from './modules/processCommandsController';
+import { getRoverHistory } from './modules/getHistoryController';
+import { authMiddleware } from './modules/auth/middleware/authMiddleware';
+import { registerUser } from './modules/auth/controllers/registerController';
+import { loginUser } from './modules/auth/controllers/loginController';
+import { deleteRoverHistory } from './modules/rovers/controllers/deleteRoverHistory';
 
 const router = Router();
 
