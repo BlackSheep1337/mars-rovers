@@ -1,14 +1,15 @@
-import { Request, Response } from "express";
-import User from "./auth/models/User";
+import { Request, Response, NextFunction } from "express";
+import { getRoverHistoryService } from "../services/getHistoryService";
+import { IUser } from "../../../shared/types";
 
-export async function getRoverHistory(req: Request, res: Response): Promise<void> {
+export async function getRoverHistory(req: Request, res: Response, next: NextFunction): Promise<void> {
   const userId = req.userId;
 
-  const user = await User.findById(userId);
-  if (!user) {
-    res.status(404).json({ message: 'User not found.' });
-    return;
-  }
+  try {
+    const user: IUser = await getRoverHistoryService(userId);
 
-  res.status(200).json({ history: user.roverHistory });
+    res.status(200).json({ history: user.roverHistory });
+  } catch (error) {
+    next(error);
+  }
 }

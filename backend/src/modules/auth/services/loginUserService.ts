@@ -2,7 +2,7 @@
 
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import User from '../../auth/models/User';
+import User from '../models/User';
 import { AuthResponse } from '../../../shared/types/app';
 import { RequestError } from '../../../shared/middlewares/errorHandler';
 
