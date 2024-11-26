@@ -1,6 +1,6 @@
 import { EAST, NORTH, SOUTH, WEST } from '../../../src/constants/directions';
-import { turnLeft, turnRight, moveForward } from '../src/services/roverService';
-import { Position } from '../src/types/typtes';
+import { turnLeft, turnRight, moveForward } from '../../../src/modules/rovers/services/roverService';
+import { Position } from '../../../src/shared/types/app';
 
 describe('Rover Service Tests', () => {
   it('should turn NORTH to WEST when turning left', () => {

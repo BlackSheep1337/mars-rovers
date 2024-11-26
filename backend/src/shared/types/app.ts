@@ -20,3 +20,11 @@ export interface IUser extends Document {
   password: string;
   roverHistory: RoverCommand[];
 }
+
+export type AuthResponse = {
+  user: {
+    id: string;
+    email: string;
+  };
+  token: string;
+};

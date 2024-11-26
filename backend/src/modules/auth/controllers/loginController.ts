@@ -1,34 +1,24 @@
-import { Request, Response } from 'express';
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
-import User from '../models/User';
+import { Request, Response, NextFunction } from 'express';
+import { loginUserService } from '../services/loginUserService';
+import { AuthResponse } from '../../../shared/types/app';
+import { RequestError } from '../../../shared/middlewares/errorHandler';
 
-export async function loginUser(req: Request, res: Response): Promise<void> {
+export async function loginUser(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
     const { email, password } = req.body;
 
     if (!email || !password) {
-      res.status(400).json({ message: 'Email and password are required.' });
-      return;
+      throw new RequestError('Email and password are required.', 400);
     }
 
-    const user = await User.findOne({ email });
-    if (!user) {
-      res.status(400).json({ message: 'Invalid credentials.' });
-      return;
-    }
+    const result: AuthResponse = await loginUserService(email, password);
 
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      res.status(400).json({ message: 'Invalid credentials.' });
-      return;
-    }
-
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET || 'default_value', { expiresIn: '1h' });
-
-    res.status(200).json({ message: 'Login successful.', token });
+    res.status(200).json({
+      message: 'Login successful.',
+      user: result.user,
+      token: result.token,
+    });
   } catch (error) {
-    console.error('Error during login:', error);
-    res.status(500).json({ message: 'An error occurred during login.' });
+    next(error);
   }
 }

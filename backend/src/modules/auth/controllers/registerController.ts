@@ -1,41 +1,24 @@
-import { Request, Response } from 'express';
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
-import User from '../models/User';
+import { Request, Response, NextFunction } from 'express';
+import { registerUserService } from '../services/registerUserService';
+import { AuthResponse } from '../../../shared/types';
+import { RequestError } from '../../../shared/middlewares/errorHandler';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'default_secret';
-
-export async function registerUser(req: Request, res: Response): Promise<void> {
+export async function registerUser(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
     const { email, password } = req.body;
 
     if (!email || !password) {
-      res.status(400).json({ message: 'Email and password are required.' });
-      return;
+      throw new RequestError('Email and password are required.', 400);
     }
 
-    const userExists = await User.findOne({ email });
-    if (userExists) {
-      res.status(400).json({ message: 'Email already registered.' });
-      return;
-    }
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    const newUser = new User({ email, password: hashedPassword });
-    await newUser.save();
-
-    const token = jwt.sign({ userId: newUser._id }, JWT_SECRET, {
-      expiresIn: '1h',
-    });
+    const result: AuthResponse = await registerUserService(email, password);
 
     res.status(201).json({
       message: 'User created successfully.',
-      user: { email: newUser.email, id: newUser._id },
-      token,
+      user: result.user,
+      token: result.token,
     });
   } catch (error) {
-    console.error('Error registering user:', error);
-    res.status(500).json({ message: 'An error occurred during registration.' });
+    next(error);
   }
 }
