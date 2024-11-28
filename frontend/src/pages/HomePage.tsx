@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const Dashboard: React.FC = () => {
+const HomePage: React.FC = () => {
   const [commands, setCommands] = useState("");
   const [rovers, setRovers] = useState([]);
 
@@ -35,7 +35,6 @@ const Dashboard: React.FC = () => {
         {rovers.map((rover, index) => (
           <div key={index}>
             <p>
-           
             </p>
           </div>
         ))}
@@ -44,4 +43,4 @@ const Dashboard: React.FC = () => {
   );
 };
 
-export default Dashboard;
+export default HomePage;

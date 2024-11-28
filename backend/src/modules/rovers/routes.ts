@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { processCommands } from './controllers/processCommandsController';
 import { getRoverHistory } from './controllers/getHistoryController';
-import { authMiddleware } from '../auth/middleware/authMiddleware';
+import { authMiddleware } from './middleware/authMiddleware';
 import { deleteRoverHistory } from './controllers/deleteRoverHistoryController';
 
 const router = Router();

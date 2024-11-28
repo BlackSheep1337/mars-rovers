@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import axios from "axios";
+import axios from 'axios';
+import React, { useState } from 'react'
 
-const LoginPage: React.FC = () => {
+const CreateAccountPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -13,7 +13,7 @@ const LoginPage: React.FC = () => {
         password,
       });
       localStorage.setItem("token", data.token);
-      window.location.href = "/home";
+      window.location.href = "/dashboard";
     } catch (error) {
       alert("Login failed. Check your credentials.");
     }
@@ -22,7 +22,7 @@ const LoginPage: React.FC = () => {
   return (
     <div className="flex justify-center mt-60">
       <div className="max-w-md">
-        <h2 className="text-2xl font-bold text-center mb-4">Log in</h2>
+        <h2 className="text-2xl font-bold text-center mb-4">Sing up</h2>
         <form onSubmit={handleLogin} className="bg-white shadow-md rounded-md p-8 space-y-4">
           <label className="text-sm text-gray-800" htmlFor="email">Email</label>
           <input
@@ -43,16 +43,16 @@ const LoginPage: React.FC = () => {
           />
 
           <button type="submit" className="bg-blue-500 text-white p-2 w-full">
-            Login
+            Sing up
           </button>
 
           <div className="text-sm text-center mb-4">
-            <a href="/register">or, Sing up</a>
+            <a href="/">Already have an account?</a>
           </div>
         </form>
       </div>
     </div>
   );
-};
+}
 
-export default LoginPage;
+export default CreateAccountPage
