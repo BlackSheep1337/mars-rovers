@@ -1,6 +1,9 @@
 import jwt from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
 
+const JWT_SECRET = process.env.JWT_SECRET || 'default_secret';
+
+
 export function authMiddleware(req: Request, res: Response, next: NextFunction): void {
   const authorizationHeader = req.headers.authorization;
 
@@ -12,7 +15,7 @@ export function authMiddleware(req: Request, res: Response, next: NextFunction):
   const token = authorizationHeader.split(" ")[1];
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || '') as { userId: string };
+    const decoded = jwt.verify(token, JWT_SECRET) as { userId: string };
     req.userId = decoded.userId;
     next();
   } catch (error) {

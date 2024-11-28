@@ -10,7 +10,7 @@ export async function registerUserService(email: string, password: string): Prom
   
   const userExists = await User.findOne({ email });
   if (userExists) {
-    throw new RequestError('Email already registered.', 400);
+    throw new RequestError('Email already registered', 400);
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);

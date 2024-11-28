@@ -6,9 +6,9 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
-    "start:dev": "tsx watch src/index.ts",
+    "start:dev": "tsx watch src/server.ts",
     "test": "jest --testPathPattern=tests/integration",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch --testPathPattern=tests/integration"
   },
   "keywords": [],
   "author": "",

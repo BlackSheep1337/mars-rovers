@@ -13,7 +13,7 @@ describe('Get Rover History Endpoint', () => {
     const response = await request(app).get('/api/rovers/history').set('Authorization', `Bearer ${authToken}`);
 
     expect(response.status).toBe(200);
-    expect(response.body).toBeDefined();
-    expect(Array.isArray(response.body)).toBe(true);
+    expect(response.body).toBeDefined()
+    expect(Array.isArray(response.body.history)).toBe(true);
   });
 });

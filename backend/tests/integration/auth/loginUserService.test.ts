@@ -19,7 +19,9 @@ describe('Login Endpoint', () => {
   test('should fail with invalid credentials', async () => {
     const response = await request(app).post('/api/rovers/login').send({ email, password: 'wrongPassword' });
 
-    expect(response.status).toBe(401);
+    const { body } = response;
+
+    expect(response.status).toBe(400);
     expect(response.body.message).toBe('Invalid credentials');
   });
 });

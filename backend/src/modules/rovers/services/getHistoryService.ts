@@ -5,7 +5,7 @@ export async function getRoverHistoryService(userId: string | undefined) {
   const user = await User.findById(userId);
   
   if (!user) {
-    throw new RequestError('User not found.', 404);
+    throw new RequestError('User not found', 404);
   }
 
   return user;

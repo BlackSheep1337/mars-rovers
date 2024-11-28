@@ -1,7 +1,7 @@
  //Authorization Bearer <Token> the token depends on the user generate the token by login in the system.
 POST http://localhost:5000/api/rovers/commands  
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzQyMzQ4NTY1ZWE2NjY5MTU3MjM0Y2UiLCJpYXQiOjE3MzI1NDM5NTIsImV4cCI6MTczMjU0NzU1Mn0.h8NM1Z8WDni4AhKo8G3zhEUfBIH1eQLOTF3BdLCvh9M
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzQ4NDQ4ZWQ3NmEzYzI3NjY2Y2Q0OTEiLCJpYXQiOjE3MzI3OTE1MDksImV4cCI6MTczMjc5NTEwOX0.0Ng5hEeMPUsYUdTGvf9po9j2IZJCwkBe4_sSlVF0xdk
 
 {
   "position": {
@@ -16,7 +16,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzQyM
 
 POST http://localhost:5000/api/rovers/register
 Content-Type: application/json
-//Register to have a valid account
+
 {
   "email": "user12@example.com",
   "password": "SecureP@ssw0rd"
@@ -29,7 +29,7 @@ POST http://localhost:5000/api/rovers/login
 Content-Type: application/json
 
 {
-  "email": "user@example.com",
+  "email": "user12@example.com",
   "password": "SecureP@ssw0rd"
 }
 
@@ -37,11 +37,10 @@ Content-Type: application/json
 
 GET http://localhost:5000/api/rovers/history
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzQyMzQ4NTY1ZWE2NjY5MTU3MjM0Y2UiLCJpYXQiOjE3MzI1NDM5NTIsImV4cCI6MTczMjU0NzU1Mn0.h8NM1Z8WDni4AhKo8G3zhEUfBIH1eQLOTF3BdLCvh9M
-//Use your Authorization Bearer <Token> to access commands history or to make new commands.
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzQ4NDQ4ZWQ3NmEzYzI3NjY2Y2Q0OTEiLCJpYXQiOjE3MzI3OTE1MDksImV4cCI6MTczMjc5NTEwOX0.0Ng5hEeMPUsYUdTGvf9po9j2IZJCwkBe4_sSlVF0xdk
 
 ###
 
 DELETE http://localhost:5000/api/rovers/history/delete/
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzQyMzQ4NTY1ZWE2NjY5MTU3MjM0Y2UiLCJpYXQiOjE3MzI1NDM5NTIsImV4cCI6MTczMjU0NzU1Mn0.h8NM1Z8WDni4AhKo8G3zhEUfBIH1eQLOTF3BdLCvh9M
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzQ4NDQ4ZWQ3NmEzYzI3NjY2Y2Q0OTEiLCJpYXQiOjE3MzI3OTE1MDksImV4cCI6MTczMjc5NTEwOX0.0Ng5hEeMPUsYUdTGvf9po9j2IZJCwkBe4_sSlVF0xdk

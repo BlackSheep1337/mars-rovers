@@ -8,7 +8,7 @@ export async function processRoverCommandsService(userId: string, initialPositio
   const user = await User.findById(userId);
   
   if (!user) {
-    throw new RequestError("User not found.", 404);
+    throw new RequestError("User not found", 404);
   }
 
   let currentPosition = { ...initialPosition };

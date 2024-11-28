@@ -19,8 +19,8 @@ describe('Process Rover Commands Endpoint', () => {
       });
 
     expect(response.status).toBe(200);
-    expect(response.body).toHaveProperty('position');
-    expect(response.body.position).toMatchObject({
+    expect(response.body.message).toBe('Command processed successfully and saved to history');
+    expect(response.body.finalPosition).toMatchObject({
       x: expect.any(Number),
       y: expect.any(Number),
       direction: expect.any(String),

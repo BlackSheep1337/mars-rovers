@@ -4,7 +4,7 @@ import { RequestError } from "../../../shared/middlewares/errorHandler";
 export async function deleteRoverHistoryService(userId: string | undefined) {
   const user = await User.findById(userId);
   if (!user) {
-    throw new RequestError('User not found.', 404);
+    throw new RequestError('User not found', 404);
   }
 
   user.roverHistory = [];
@@ -13,6 +13,6 @@ export async function deleteRoverHistoryService(userId: string | undefined) {
     await user.save();
     return user;
   } catch (error) {
-    throw new RequestError('Failed to delete rover history.', 500);
+    throw new RequestError('Failed to delete rover history', 500);
   }
 }

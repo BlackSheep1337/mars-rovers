@@ -21,6 +21,6 @@ describe('Register Endpoint', () => {
     const response = await request(app).post('/api/rovers/register').send({ email, password: 'AnotherPassword' });
 
     expect(response.status).toBe(400);
-    expect(response.body.message).toBe('Email already in use');
+    expect(response.body.message).toBe('Email already registered');
   });
 });

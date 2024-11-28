@@ -14,7 +14,7 @@ export async function registerUser(req: Request, res: Response, next: NextFuncti
     const result: AuthResponse = await registerUserService(email, password);
 
     res.status(201).json({
-      message: 'User created successfully.',
+      message: 'User registered successfully',
       user: result.user,
       token: result.token,
     });

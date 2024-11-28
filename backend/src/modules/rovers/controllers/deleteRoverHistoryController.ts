@@ -8,7 +8,7 @@ export async function deleteRoverHistory(req: Request, res: Response, next: Next
   try {
     const updatedUser: IUser = await deleteRoverHistoryService(userId);
 
-    res.status(200).json({ history: updatedUser.roverHistory });
+    res.status(200).json({ history: updatedUser.roverHistory, message: 'History deleted' });
   } catch (error) {
     next(error);
   }
