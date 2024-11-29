@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 
+
 const CreateAccountPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -8,13 +9,15 @@ const CreateAccountPage = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("http://localhost:5000/api/rovers/login", {
+      const { data } = await axios.post("http://localhost:5000/api/rovers/register", {
         email,
         password,
       });
+
       localStorage.setItem("token", data.token);
-      window.location.href = "/dashboard";
+      window.location.href = "/";
     } catch (error) {
+      console.error(error);
       alert("Login failed. Check your credentials.");
     }
   };
