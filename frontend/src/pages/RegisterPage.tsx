@@ -9,13 +9,11 @@ const CreateAccountPage = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("http://localhost:5000/api/rovers/register", {
+      await axios.post("http://localhost:5000/api/rovers/register", {
         email,
         password,
       });
-
-      localStorage.setItem("token", data.token);
-      window.location.href = "/";
+      window.location.href = '/';
     } catch (error) {
       console.error(error);
       alert("Login failed. Check your credentials.");
