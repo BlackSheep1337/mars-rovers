@@ -1,4 +1,4 @@
-interface Rover {
+interface IRover {
   position: {
     x: number;
     y: number;
@@ -48,11 +48,11 @@ interface MessageProps {
 }
 
 interface CommandHistoryProps {
-  rovers: Rover[];
+  rovers: IRover[];
 }
 
 export {
-  Rover,
+  IRover,
   IMessage,
   AuthFormProps,
   MarsRoverFormProps,

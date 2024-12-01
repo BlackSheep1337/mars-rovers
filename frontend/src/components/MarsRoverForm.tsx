@@ -10,6 +10,9 @@ const MarsRoverForm: React.FC<MarsRoverFormProps> = ({
   commands,
   setCommands,
 }) => {
+
+  const validateRange = (value: number, min: number, max: number) =>
+    Math.min(max, Math.max(min, value));
   return (
     <div className="mb-4">
       <label htmlFor="x" className="block mb-2">
@@ -20,7 +23,7 @@ const MarsRoverForm: React.FC<MarsRoverFormProps> = ({
           min="0"
           max="3"
           value={x}
-          onChange={(e) => setX(Math.min(Math.max(parseInt(e.target.value) || 0, 0), 3))}
+          onChange={(e) => setX(validateRange(parseInt(e.target.value), 0, 3) || 0)}
           className="border p-2 w-full"
         />
       </label>
@@ -33,7 +36,7 @@ const MarsRoverForm: React.FC<MarsRoverFormProps> = ({
           min="0"
           max="3"
           value={y}
-          onChange={(e) => setY(Math.min(Math.max(parseInt(e.target.value) || 0, 0), 3))}
+          onChange={(e) => setX(validateRange(parseInt(e.target.value), 0, 3) || 0)}
           className="border p-2 w-full"
         />
       </label>

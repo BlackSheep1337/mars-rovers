@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useRoverAPI } from "../hooks/useRoverAPI";
-import { Rover, IMessage } from "../types/app";
+import { IRover, IMessage } from "../types/app";
 import MarsRoverForm from "../components/MarsRoverForm";
 import ActionButtons from "../components/ActionButton";
 import MessageComponent from "../components/MessageComponent";
@@ -12,7 +12,7 @@ const HomePage: React.FC = () => {
   const [y, setY] = useState<number>(0);
   const [direction, setDirection] = useState<string>("N");
   const [commands, setCommands] = useState<string>("");
-  const [rovers, setRovers] = useState<Rover[]>([]);
+  const [rovers, setRovers] = useState<IRover[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [message, setMessage] = useState<IMessage>(
     {
@@ -25,9 +25,6 @@ const HomePage: React.FC = () => {
   const handleSetMessage = ({ text, type }: { text: string; type: string; }) => {
     setMessage({ text, type });
   };
-
-  const validateRange = (value: number, min: number, max: number) =>
-    Math.min(max, Math.max(min, value));
   
   const getCommandsHistory = useCallback(async () => {
     const { history: rovers }  = await getHistory();
