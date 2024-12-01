@@ -1,25 +1,20 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useState } from "react";
+import { useRoverAPI } from "../hooks/useRoverAPI";
 
 const LoginPage: React.FC = () => {
+  const { login } = useRoverAPI();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  useEffect(() => { 
-    localStorage.setItem('token', '');
-  }, [])
+  const [error, setError] = useState("");
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError("");
     try {
-      const { data: { token } } = await axios.post("http://localhost:5000/api/rovers/login", {
-        email,
-        password,
-      });
-      localStorage.setItem('token', token);
-      window.location.href = '/home';
-    } catch (error) {
-      alert("Login failed. Check your credentials.");
+      await login(email, password);
+      window.location.href = "/home";
+    } catch (err) {
+      setError("Login failed. Check your credentials.");
     }
   };
 
@@ -36,7 +31,6 @@ const LoginPage: React.FC = () => {
             onChange={(e) => setEmail(e.target.value)}
             className="w-full bg-gray-50 border border-gray-100 h-6 p-4 m-2"
           />
-
           <label className="text-sm text-gray-800" htmlFor="password">Password</label>
           <input
             type="password"
@@ -45,13 +39,12 @@ const LoginPage: React.FC = () => {
             onChange={(e) => setPassword(e.target.value)}
             className="w-full bg-gray-50 border border-gray-100 h-6 p-4 m-2"
           />
-
           <button type="submit" className="bg-blue-500 text-white p-2 w-full">
             Login
           </button>
-
-          <div className="text-sm text-center mb-4">
-            <a href="/register">or, Sing up</a>
+          {error && <p className="text-red-500 text-center mt-2">{error}</p>}
+          <div className="text-sm text-center mt-4">
+            <a href="/register">or, Sign up</a>
           </div>
         </form>
       </div>

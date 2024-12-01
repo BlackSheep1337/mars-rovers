@@ -1,30 +1,28 @@
-import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useState } from "react";
+import { useRoverAPI } from "../hooks/useRoverAPI";
 
-
-const CreateAccountPage = () => {
+const RegisterPage: React.FC = () => {
+  const { register } = useRoverAPI();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError("");
     try {
-      await axios.post("http://localhost:5000/api/rovers/register", {
-        email,
-        password,
-      });
-      window.location.href = '/';
-    } catch (error) {
-      console.error(error);
-      alert("Login failed. Check your credentials.");
+      await register(email, password);
+      window.location.href = "/";
+    } catch (err) {
+      setError("Registration failed. Try again later.");
     }
   };
 
   return (
     <div className="flex justify-center mt-60">
       <div className="max-w-md">
-        <h2 className="text-2xl font-bold text-center mb-4">Sing up</h2>
-        <form onSubmit={handleLogin} className="bg-white shadow-md rounded-md p-8 space-y-4">
+        <h2 className="text-2xl font-bold text-center mb-4">Sign up</h2>
+        <form onSubmit={handleRegister} className="bg-white shadow-md rounded-md p-8 space-y-4">
           <label className="text-sm text-gray-800" htmlFor="email">Email</label>
           <input
             type="email"
@@ -33,7 +31,6 @@ const CreateAccountPage = () => {
             onChange={(e) => setEmail(e.target.value)}
             className="w-full bg-gray-50 border border-gray-100 h-6 p-4 m-2"
           />
-
           <label className="text-sm text-gray-800" htmlFor="password">Password</label>
           <input
             type="password"
@@ -42,18 +39,17 @@ const CreateAccountPage = () => {
             onChange={(e) => setPassword(e.target.value)}
             className="w-full bg-gray-50 border border-gray-100 h-6 p-4 m-2"
           />
-
           <button type="submit" className="bg-blue-500 text-white p-2 w-full">
-            Sing up
+            Sign up
           </button>
-
-          <div className="text-sm text-center mb-4">
+          {error && <p className="text-red-500 text-center mt-2">{error}</p>}
+          <div className="text-sm text-center mt-4">
             <a href="/">Already have an account?</a>
           </div>
         </form>
       </div>
     </div>
   );
-}
+};
 
-export default CreateAccountPage
+export default RegisterPage;
