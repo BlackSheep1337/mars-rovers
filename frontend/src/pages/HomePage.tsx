@@ -1,6 +1,10 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useRoverAPI } from "../hooks/useRoverAPI";
-import { Rover, Message } from "../types/app";
+import { Rover, IMessage } from "../types/app";
+import MarsRoverForm from "../components/MarsRoverForm";
+import ActionButtons from "../components/ActionButton";
+import MessageComponent from "../components/MessageComponent";
+import CommandHistory from "../components/CommandHistory";
 
 const HomePage: React.FC = () => {
   const { sendCommands, getHistory, deleteHistory } = useRoverAPI();
@@ -10,7 +14,7 @@ const HomePage: React.FC = () => {
   const [commands, setCommands] = useState<string>("");
   const [rovers, setRovers] = useState<Rover[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const [message, setMessage] = useState<Message>(
+  const [message, setMessage] = useState<IMessage>(
     {
       text: "",
       type: "",
@@ -90,105 +94,24 @@ const HomePage: React.FC = () => {
   return (
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">Mars Rover Dashboard</h1>
-
-      <div className="mb-4">
-        <label htmlFor="x" className="block mb-2">
-          X Position (0-3):
-          <input
-            id="x"
-            type="number"
-            min="0"
-            max="3"
-            value={x}
-            onChange={(e) =>
-              setX(validateRange(parseInt(e.target.value) || 0, 0, 3))
-            }
-            className="border p-2 w-full"
-          />
-        </label>
-
-        <label htmlFor="y" className="block mb-2">
-          Y Position (0-3):
-          <input
-            id="y"
-            type="number"
-            min="0"
-            max="3"
-            value={y}
-            onChange={(e) =>
-              setY(validateRange(parseInt(e.target.value) || 0, 0, 3))
-            }
-            className="border p-2 w-full"
-          />
-        </label>
-
-        <label htmlFor="direction" className="block mb-2">
-          Direction:
-          <select
-            id="direction"
-            value={direction}
-            onChange={(e) => setDirection(e.target.value)}
-            className="border p-2 w-full"
-          >
-            <option value="N">North (N)</option>
-            <option value="E">East (E)</option>
-            <option value="S">South (S)</option>
-            <option value="W">West (W)</option>
-          </select>
-        </label>
-
-        <label htmlFor="commands" className="block mb-2">
-          Commands:
-          <input
-            id="commands"
-            type="text"
-            placeholder="Enter Commands (e.g., MRRMMRMRRM)"
-            value={commands}
-            onChange={(e) => setCommands(e.target.value.toUpperCase())}
-            className="border p-2 w-full"
-          />
-        </label>
-      </div>
-      
-      <div>
-      <button
-        onClick={handleCommandSubmit}
-        className="w-40 bg-green-500 text-white p-2"
-        disabled={loading}
-      >
-        {loading ? "Processing..." : "Send Commands"}
-        </button>
-        {rovers.length ? 
-          <button
-            onClick={handleDeleteHistory}
-            className="w-40 bg-red-500 text-white p-2 ml-4"
-            disabled={loading}
-          >
-            Delete History
-          </button> : ""
-        }
-
-      </div>
-
-      {message.text && (
-        <p className={`text-lg mt-4 ${message.type === "error" ? "text-red-600" : "text-green-600"}`}>
-          {message.text}
-        </p>
-      )}
-
-      <div className="mt-4">
-        {rovers.length ? <h1 className="mb-4 text-2xl font-bold">Commands History</h1>: ""}
-        {rovers.map(({position: {x, y, direction}, commands}, index) => (
-          <div key={index} className="border p-2 mb-2">
-            <p>
-              <strong>Rover {index + 1}:</strong>
-            </p>
-            <p>Position: ({x}, {y})</p>
-            <p>Direction: {direction}</p>
-            <p>Commands Executed: {commands}</p>
-          </div>
-        ))}
-      </div>
+      <MarsRoverForm
+        x={x}
+        setX={setX}
+        y={y}
+        setY={setY}
+        direction={direction}
+        setDirection={setDirection}
+        commands={commands}
+        setCommands={setCommands}
+      />
+      <ActionButtons
+        loading={loading}
+        handleCommandSubmit={handleCommandSubmit}
+        handleDeleteHistory={handleDeleteHistory}
+        hasHistory={!!rovers.length}
+      />
+      <MessageComponent message={{ text: message.text, type: message.type }} />
+      <CommandHistory rovers={rovers} />
     </div>
   );
 };
