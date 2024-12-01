@@ -1,4 +1,4 @@
-import { MarsRoverFormProps } from "../types";
+import { MarsRoverFormProps } from "../../types";
 
 const MarsRoverForm: React.FC<MarsRoverFormProps> = ({
   x,

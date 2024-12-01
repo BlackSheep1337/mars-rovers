@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useRoverAPI } from "../hooks/useRoverAPI";
 import { IRover, IMessage } from "../types/app";
-import MarsRoverForm from "../components/MarsRoverForm";
+import MarsRoverForm from "../components/MarsRoverForm/MarsRoverForm";
 import ActionButtons from "../components/ActionButton";
 import MessageComponent from "../components/MessageComponent";
 import CommandHistory from "../components/CommandHistory";
