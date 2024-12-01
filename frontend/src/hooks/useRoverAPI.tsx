@@ -5,6 +5,21 @@ const API_URL = "http://localhost:5000/api/rovers";
 export const useRoverAPI = () => {
   const token = localStorage.getItem("token");
 
+  const getHistory = async () => {
+    const { data } = await axios.get(`${API_URL}/history`, {
+      headers: { Authorization: `Bearer ${token}`}
+    });
+    return data;
+  }
+
+  const deleteHistory = async () => {
+    const { data } = await axios.delete(`${API_URL}/history/delete`, {
+      headers: { Authorization: `Bearer ${token}`}
+    });
+    return data;
+  }
+
+
   const login = async (email: string, password: string) => {
     const { data } = await axios.post(`${API_URL}/login`, { email, password });
     localStorage.setItem("token", data.token);
@@ -26,5 +41,5 @@ export const useRoverAPI = () => {
     return data;
   };
 
-  return { login, register, sendCommands };
+  return { login, register, sendCommands, getHistory, deleteHistory };
 };

@@ -20,7 +20,7 @@ export async function loginUserService(email: string, password: string): Promise
     throw new RequestError('Invalid credentials', 400);
   }
 
-  const token = jwt.sign({ userId: user._id?.toString() }, JWT_SECRET, { expiresIn: '1h' });
+  const token = jwt.sign({ userId: user._id?.toString() }, JWT_SECRET);
 
   return {
     user: { id: user._id!.toString(), email: user.email },

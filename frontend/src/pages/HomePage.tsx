@@ -1,33 +1,57 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useRoverAPI } from "../hooks/useRoverAPI";
-import { Rover } from "../types/app";
+import { Rover, Message } from "../types/app";
 
 const HomePage: React.FC = () => {
-  const { sendCommands } = useRoverAPI();
-  const [x, setX] = useState(0);
-  const [y, setY] = useState(0);
-  const [direction, setDirection] = useState("N");
-  const [commands, setCommands] = useState("");
+  const { sendCommands, getHistory, deleteHistory } = useRoverAPI();
+  const [x, setX] = useState<number>(0);
+  const [y, setY] = useState<number>(0);
+  const [direction, setDirection] = useState<string>("N");
+  const [commands, setCommands] = useState<string>("");
   const [rovers, setRovers] = useState<Rover[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const [message, setMessage] = useState<Message>(
+    {
+      text: "",
+      type: "",
+    }
+  );
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleSetMessage = ({ text, type }: { text: string; type: string; }) => {
+    setMessage({ text, type });
+  };
 
   const validateRange = (value: number, min: number, max: number) =>
     Math.min(max, Math.max(min, value));
+  
+  const getCommandsHistory = useCallback(async () => {
+    const { history: rovers }  = await getHistory();
+    setRovers(rovers || []);
+  }, [getHistory]);
+  
+  const handleDeleteHistory = useCallback(async () => {
+    const { message } = await deleteHistory();
+    setRovers([]);
+    handleSetMessage({ text: message, type: "success" });
+  }, [deleteHistory]);
 
   const handleCommandSubmit = async () => {
-    setError("");
+    handleSetMessage({text: "", type: ""});
     setLoading(true);
 
     try {
-      const data = await sendCommands(x, y, direction, commands);
-      setRovers(data.rovers || []);
+      const { message } = await sendCommands(x, y, direction, commands);
+
+      getCommandsHistory();
       resetFields();
+      handleSetMessage({text: message, type: "success"});
+
     } catch (err) {
-      setError("Failed to process commands. Please try again later.");
+      handleSetMessage({text: "Failed to process commands. Please try again later", type: "error"});
     } finally {
       setLoading(false);
-    }
+    } 
   };
 
   const resetFields = () => {
@@ -36,6 +60,32 @@ const HomePage: React.FC = () => {
     setDirection("N");
     setCommands("");
   };
+
+  const timeOutMessage = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+
+    timeoutRef.current = setTimeout(() => {
+      setMessage({ text: "", type: "" });
+      timeoutRef.current = null;
+  }, 3000);
+}
+
+  useEffect(() => {
+    timeOutMessage();
+
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, [message.text]);
+
+  useEffect(() => {
+    getCommandsHistory();
+  }, [getCommandsHistory]);
+
 
   return (
     <div className="p-4">
@@ -99,26 +149,43 @@ const HomePage: React.FC = () => {
           />
         </label>
       </div>
-
+      
+      <div>
       <button
         onClick={handleCommandSubmit}
-        className="bg-green-500 text-white p-2"
+        className="w-40 bg-green-500 text-white p-2"
         disabled={loading}
       >
         {loading ? "Processing..." : "Send Commands"}
-      </button>
+        </button>
+        {rovers.length ? 
+          <button
+            onClick={handleDeleteHistory}
+            className="w-40 bg-red-500 text-white p-2 ml-4"
+            disabled={loading}
+          >
+            Delete History
+          </button> : ""
+        }
 
-      {error && <p className="text-red-500 mt-2">{error}</p>}
+      </div>
+
+      {message.text && (
+        <p className={`text-lg mt-4 ${message.type === "error" ? "text-red-600" : "text-green-600"}`}>
+          {message.text}
+        </p>
+      )}
 
       <div className="mt-4">
-        {rovers.map((rover, index) => (
+        {rovers.length ? <h1 className="mb-4 text-2xl font-bold">Commands History</h1>: ""}
+        {rovers.map(({position: {x, y, direction}, commands}, index) => (
           <div key={index} className="border p-2 mb-2">
             <p>
               <strong>Rover {index + 1}:</strong>
             </p>
-            <p>Position: ({rover.position.x}, {rover.position.y})</p>
-            <p>Direction: {rover.position.direction}</p>
-            <p>Commands Executed: {rover.commands}</p>
+            <p>Position: ({x}, {y})</p>
+            <p>Direction: {direction}</p>
+            <p>Commands Executed: {commands}</p>
           </div>
         ))}
       </div>

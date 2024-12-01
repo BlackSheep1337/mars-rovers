@@ -7,6 +7,12 @@ interface Rover {
   commands: string;
 }
 
+type Message = {
+  text: string;
+  type: string;
+}
+
 export {
   Rover,
+  Message,
 }

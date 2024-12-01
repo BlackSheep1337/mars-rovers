@@ -17,7 +17,7 @@ export async function registerUserService(email: string, password: string): Prom
   const newUser = new User({ email, password: hashedPassword });
   await newUser.save();
 
-  const token = jwt.sign({ userId: newUser._id?.toString() }, JWT_SECRET, { expiresIn: '1h' });
+  const token = jwt.sign({ userId: newUser._id?.toString() }, JWT_SECRET);
 
   return {
     user: { id: newUser._id!.toString(), email: newUser.email },
