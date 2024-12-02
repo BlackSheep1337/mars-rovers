@@ -3,7 +3,7 @@ import { useRoverAPI } from "../hooks/useRoverAPI";
 import { IRover, IMessage } from "../types/app";
 import MarsRoverForm from "../components/MarsRoverForm/MarsRoverForm";
 import ActionButtons from "../components/ActionButton/ActionButton";
-import MessageComponent from "../components/MessageComponent";
+import MessageComponent from "../components/MessageComponent/MessageComponent";
 import CommandHistory from "../components/CommandHistory/CommandHistory";
 
 const HomePage: React.FC = () => {
