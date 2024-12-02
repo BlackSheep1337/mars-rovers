@@ -34,7 +34,7 @@ const HomePage: React.FC = () => {
   const handleDeleteHistory = useCallback(async () => {
     const { message } = await deleteHistory();
     setRovers([]);
-    handleSetMessage({ text: message, type: "success" });
+    handleSetMessage({ text: message, type: "error" });
   }, [deleteHistory]);
 
   const handleCommandSubmit = async () => {
