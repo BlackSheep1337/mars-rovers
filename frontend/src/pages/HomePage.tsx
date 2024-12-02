@@ -4,7 +4,7 @@ import { IRover, IMessage } from "../types/app";
 import MarsRoverForm from "../components/MarsRoverForm/MarsRoverForm";
 import ActionButtons from "../components/ActionButton/ActionButton";
 import MessageComponent from "../components/MessageComponent";
-import CommandHistory from "../components/CommandHistory";
+import CommandHistory from "../components/CommandHistory/CommandHistory";
 
 const HomePage: React.FC = () => {
   const { sendCommands, getHistory, deleteHistory } = useRoverAPI();

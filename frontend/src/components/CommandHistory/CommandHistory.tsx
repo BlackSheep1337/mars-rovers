@@ -1,4 +1,4 @@
-import { CommandHistoryProps } from "../types";
+import { CommandHistoryProps } from "../../types";
 
 const CommandHistory: React.FC<CommandHistoryProps> = ({ rovers }) => {
   if (!rovers.length) return null;
@@ -7,7 +7,7 @@ return (
   <div className="mt-4">
     <h1 className="mb-4 text-2xl font-bold">Commands History</h1>
     {rovers.map(({ position: { x, y, direction }, commands }, index) => (
-      <div key={index} className="flex mb-4">
+      <div key={index} className="flex mb-4" data-testid={`rover-${index}`}>
         <div className="flex-1 border p-2">
           <h2 className="font-bold">Command Rover {index + 1}:</h2>
           <p>Position: ({x}, {y})</p>
