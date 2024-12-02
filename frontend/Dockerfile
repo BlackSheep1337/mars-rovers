@@ -1,24 +1,17 @@
-FROM node:16 AS build
+FROM node:16 AS base
 WORKDIR /app
 
-# Copiar o package.json e o package-lock.json
+# Copie apenas os arquivos necessários para instalação
 COPY package.json package-lock.json ./
 
-# Instalar as dependências
-RUN npm install
+# Instale as dependências no contêiner
+RUN npm ci
 
-# Copiar o restante do código
+# Copie o restante do código para o contêiner
 COPY . .
 
-# Rodar o comando de build
-RUN npm run build
+# Porta para expor o frontend
+EXPOSE 3000
 
-# Usar Nginx para servir os arquivos do build
-FROM nginx:stable-alpine
-COPY --from=build /app/build /usr/share/nginx/html
-
-# Expor a porta 80
-EXPOSE 80
-
-# Rodar o Nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Comando padrão
+CMD ["npm", "start"]

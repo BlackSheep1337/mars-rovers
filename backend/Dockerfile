@@ -1,17 +1,17 @@
-FROM node:16 AS build
+FROM node:16 AS base
 WORKDIR /app
 
-# Copiar os arquivos de dependência
+# Copie apenas os arquivos necessários para instalação
 COPY package.json package-lock.json ./
 
-# Instalar as dependências
-RUN npm install
+# Instale as dependências no contêiner
+RUN npm ci
 
-# Copiar o restante do código do backend
+# Copie o restante do código para o contêiner
 COPY . .
 
-# Expor a porta em que o backend estará ouvindo
-EXPOSE 3000
+# Porta para expor o backend
+EXPOSE 4000
 
-# Rodar o servidor em modo de desenvolvimento
+# Comando padrão (pode ser sobrescrito no docker-compose)
 CMD ["npm", "run", "start:dev"]

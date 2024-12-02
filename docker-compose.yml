@@ -1,18 +1,31 @@
-version: '3.8'
-
+version: "3.9"
 services:
   backend:
     build:
       context: ./backend
-      dockerfile: Dockerfile
-    ports:
-      - "5000:5000"
     volumes:
       - ./backend:/app
+      - /app/node_modules
+    ports:
+      - "5000:5000"
+    command: npm run start:dev
     environment:
-      - MONGO_URI=mongodb://mongo:27017/roverdb
+      - NODE_ENV=development
+      - MONGO_URI=mongodb://mongo:27017/mydatabase
     depends_on:
       - mongo
+
+  frontend:
+    build:
+      context: ./frontend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    command: npm start
+    environment:
+      - NODE_ENV=development
 
   mongo:
     image: mongo:5.0
@@ -21,15 +34,6 @@ services:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db
-
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./frontend:/app
 
 volumes:
   mongo-data:
