@@ -1,13 +1,17 @@
-FROM node:18
-
+FROM node:16 AS build
 WORKDIR /app
 
-COPY package*.json ./
+# Copiar os arquivos de dependência
+COPY package.json package-lock.json ./
 
+# Instalar as dependências
 RUN npm install
 
+# Copiar o restante do código do backend
 COPY . .
 
-EXPOSE 5000
+# Expor a porta em que o backend estará ouvindo
+EXPOSE 3000
 
-CMD ["npm", "run", "dev"]
+# Rodar o servidor em modo de desenvolvimento
+CMD ["npm", "run", "start:dev"]
