@@ -1,5 +1,5 @@
 import React from 'react';
-import { AuthFormProps } from '../types';
+import { AuthFormProps } from '../../types';
 
 const AuthForm: React.FC<AuthFormProps> = ({
   title,
@@ -17,7 +17,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
     <div className="flex justify-center mt-60">
       <div className="max-w-md">
         <h2 className="text-2xl font-bold text-center mb-4">{title}</h2>
-        <form onSubmit={onSubmit} className="bg-white shadow-md rounded-md p-8 space-y-4">
+        <form role="form" onSubmit={onSubmit} className="bg-white shadow-md rounded-md p-8 space-y-4">
           <label className="text-sm text-gray-800" htmlFor="email">Email</label>
           <input
             type="email"

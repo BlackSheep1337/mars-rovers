@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useRoverAPI } from "../hooks/useRoverAPI";
-import AuthForm from "../components/AuthForm";
+import AuthForm from "../components/AuthForm/AuthForm";
 
 const RegisterPage: React.FC = () => {
   const { register } = useRoverAPI();
