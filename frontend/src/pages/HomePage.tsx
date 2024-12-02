@@ -22,6 +22,13 @@ const HomePage: React.FC = () => {
   );
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
+  const command = {
+    x,
+    y,
+    direction,
+    commands,
+  }
+
   const handleSetMessage = ({ text, type }: { text: string; type: string; }) => {
     setMessage({ text, type });
   };
@@ -107,7 +114,7 @@ const HomePage: React.FC = () => {
         hasHistory={!!rovers.length}
       />
       <MessageComponent message={{ text: message.text, type: message.type }} />
-      <CommandHistory rovers={rovers} />
+      <CommandHistory command={command} rovers={rovers} />
     </div>
   );
 };

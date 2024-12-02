@@ -1,4 +1,9 @@
 interface IRover {
+  command: {
+    x: number;
+    y: number;
+    direction: string;
+  }
   position: {
     x: number;
     y: number;
@@ -49,6 +54,11 @@ interface MessageProps {
 
 interface CommandHistoryProps {
   rovers: IRover[];
+  command: {
+    x: number;
+    y: number;
+    direction: string;
+  }
 }
 
 export {
