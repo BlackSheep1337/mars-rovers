@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useRoverAPI } from "../hooks/useRoverAPI";
 import { IRover, IMessage } from "../types/app";
 import MarsRoverForm from "../components/MarsRoverForm/MarsRoverForm";
-import ActionButtons from "../components/ActionButton";
+import ActionButtons from "../components/ActionButton/ActionButton";
 import MessageComponent from "../components/MessageComponent";
 import CommandHistory from "../components/CommandHistory";
 
@@ -38,7 +38,7 @@ const HomePage: React.FC = () => {
   }, [deleteHistory]);
 
   const handleCommandSubmit = async () => {
-    handleSetMessage({text: "", type: ""});
+    handleSetMessage({ text: "", type: "" });
     setLoading(true);
 
     try {
@@ -46,10 +46,9 @@ const HomePage: React.FC = () => {
 
       getCommandsHistory();
       resetFields();
-      handleSetMessage({text: message, type: "success"});
-
+      handleSetMessage({ text: message, type: "success" });
     } catch (err) {
-      handleSetMessage({text: "Failed to process commands. Please try again later", type: "error"});
+      handleSetMessage({ text: "Failed to process commands. Please try again later", type: "error" });
     } finally {
       setLoading(false);
     } 

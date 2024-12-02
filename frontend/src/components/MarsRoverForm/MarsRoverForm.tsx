@@ -36,7 +36,7 @@ const MarsRoverForm: React.FC<MarsRoverFormProps> = ({
           min="0"
           max="3"
           value={y}
-          onChange={(e) => setX(validateRange(parseInt(e.target.value), 0, 3) || 0)}
+          onChange={(e) => setY(validateRange(parseInt(e.target.value), 0, 3) || 0)}
           className="border p-2 w-full"
         />
       </label>
@@ -59,6 +59,7 @@ const MarsRoverForm: React.FC<MarsRoverFormProps> = ({
       <label htmlFor="commands" className="block mb-2">
         Commands:
         <input
+          data-testid="commands-data-id" 
           id="commands"
           type="text"
           placeholder="Enter Commands (e.g., MRRMMRMRRM)"
