@@ -15,7 +15,6 @@
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
@@ -30,23 +29,28 @@
 
 ## About The Project
 
-There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
+The Mars Rovers project was created for a technical challenge from Voyager Portal as part of their hiring process for a Fullstack Software Engineer position. The goal was to show my skills by building a full-stack app that works well and follows good coding practices.
 
-Here's why:
+This project simulates a system to control rovers on a grid. Users can send commands, track their movements, and manage their states through a functional interface. It uses Node.js for the backend, React for the frontend, and MongoDB as the database. Everything runs in a Docker environment, making it easy to set up and run.
 
-- Your time should be focused on creating something amazing. A project that solves a problem and helps others
-- You shouldn't be doing the same tasks over and over like creating a README from scratch
-- You should implement DRY principles to the rest of your life :smile:
+Key Features:
+Backend: Built with Node.js, with simple, clear code that ensures good performance and easy updates.
+Frontend: Developed with React, offering a clean and user-friendly way to interact with the rovers.
+Database: Stores rover data and grid info using MongoDB.
+Testing: Focus on unit and functional tests to keep the code reliable.
+Deployment: Uses Docker to make running the project simple and consistent.
+This project helped me show:
 
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
-
-Use the `BLANK_README.md` to get started.
+How I write reusable and well-organized code.
+My ability to design APIs and create interactive interfaces.
+How I connect technical solutions to real-world needs.
+My experience with tools like Docker to make development and deployment smooth.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+This project was designed using MERN stack Mongo, Express, React and Nodejs.
 
 - [![React][React.js]][React-url]
 - [![Node][Node.js]][Node-url]
@@ -58,40 +62,35 @@ This section should list any major frameworks/libraries used to bootstrap your p
 
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+Follow these steps to set up and run the project locally using Docker.
 
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-
-- npm
-  ```sh
-  npm install npm@latest -g
-  ```
 
 ### Installation
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
+1. Clone the repo
+   ```sh
+    git clone git@github.com:BlackSheep1337/mars-rovers.git
+    cd mars-rovers
+   ```
+2. Set up environment variables
+  The backend requires a .env file to run properly. Create a .env file inside the backend folder and add the following variables:
+   ```sh
+    PORT=5000
+    MONGO_URI=mongodb://mongo:27017/roverDB
+    JWT_SECRET=YourSecretKeyHere
+    TEST_PASSWORD=YourTestPasswordHere
+   ```
+   Replace YourSecretKeyHere and YourTestPasswordHere with your own secure values.
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone git@github.com:BlackSheep1337/mars-rovers.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Build and Run with Docker Compose
+3. Build and run the project
+Use Docker Compose to build and run the containers:
    ```js
     docker-compose up --build
    ```
-5. Change git remote url to avoid accidental pushes to base project
-   ```sh
-   git remote set-url origin github_username/repo_name
-   git remote -v # confirm the changes
-   ```
+Access the Project
+Frontend: Open your browser at http://localhost:3000
+
+Backend: Access the API at http://localhost:5000
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -99,9 +98,54 @@ _Below is an example of how you can instruct your audience on installing and set
 
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+This project lets you manage rovers using an API and a frontend interface. The system automatically generates a Bearer token when you register and log in to an account. After logging in, you will receive the token needed to interact with the other routes.
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+
+   ```sh
+      Authorization: Bearer <your_token_here>
+   ```
+
+
+You can interact with the backend API directly using tools like Postman or cURL.
+Here are some useful examples:
+
+### Register
+   ```sh
+      POST http://localhost:5000/api/rovers/register
+      Content-Type: application/json
+      
+      {
+        "email": "user12@example.com",
+        "password": "SecureP@ssw0rd"
+      }
+   ```
+
+### Login
+   ```sh
+      POST http://localhost:5000/api/rovers/login
+      Content-Type: application/json
+      
+      {
+        "email": "user12@example.com",
+        "password": "SecureP@ssw0rd"
+      }
+   ```
+
+### Send command
+   ```sh
+      POST http://localhost:5000/api/rovers/commands  
+      Content-Type: application/json
+      Authorization: Bearer <token>
+      
+      {
+        "position": {
+          "x": 1,
+          "y": 0,
+          "direction": "E"
+        },
+        "commands": "MRRMMRMRRM"
+      }
+   ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -109,16 +153,30 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 ## Contributing
 
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+Contributions are welcome and make this project better! Whether it's reporting bugs, suggesting new features, or submitting pull requests, your input is greatly appreciated.
 
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
+Here’s how you can contribute:
 
 1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
+   Click on the "Fork" button at the top of this repository.
+
+2. Create a Feature Branch
+```sh
+    git checkout -b feature/AmazingFeature
+   ```
+3. Commit your Changes
+ ```sh
+    git commit -m "Add: Description of your feature or fix"
+   ```
+
+4. Push to the Branch
+ ```sh
+    git push origin feature/YourFeatureName
+   ```
 5. Open a Pull Request
+   Go to the original repository and open a pull request explaining your changes.
+
+
 
 <!-- LICENSE -->
 
@@ -133,6 +191,10 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 ## Contact
 
 Email - alexandresg19@gmail.com
+
+Phone (+55) 71 982220370
+
+Linkedin: [https://www.linkedin.com/in/dev-alexandre-pereira/?locale=en_US](https://www.linkedin.com/in/dev-alexandre-pereira/?locale=en_US)
 
 Project Link: [https://github.com/BlackSheep1337/mars-rovers](https://github.com/BlackSheep1337/mars-rovers)
 
