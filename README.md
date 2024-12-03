@@ -20,19 +20,15 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
 <!-- ABOUT THE PROJECT -->
 
 ## About The Project
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
 
 There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
 
@@ -54,7 +50,7 @@ This section should list any major frameworks/libraries used to bootstrap your p
 
 - [![React][React.js]][React-url]
 - [![Node][Node.js]][Node-url]
-- [![Mongodb][Mongodb.com]][Mongodb-url]
+- [![MongoDB][Mongodb.com]][Mongodb-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -174,3 +170,7 @@ Project Link: [https://github.com/BlackSheep1337/mars-rovers](https://github.com
 [Bootstrap-url]: https://getbootstrap.com
 [JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
 [JQuery-url]: https://jquery.com
+[Node.js]: https://img.shields.io/badge/Node.js-6DA55F?style=flat-square&logo=node.js&logoColor=white
+[Node-url]: https://nodejs.org/
+[Mongodb.com]: https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white
+[Mongodb-url]: https://www.mongodb.com/
